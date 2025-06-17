@@ -30,7 +30,7 @@ export default function LoginPage() {
         .min(6, "At least 6 characters")
         .required("Required"),
     }),
-    onSubmit: async (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting }) => {
       try {
         const res = await fetch("http://localhost:3002/login", {
           method: "POST",
@@ -48,7 +48,7 @@ export default function LoginPage() {
         localStorage.setItem("token", data.token);
         toast.success("Login successful!");
         router.push("/dashboard");
-      } catch (err) {
+      } catch {
         toast.error("Network error");
       } finally {
         setSubmitting(false);

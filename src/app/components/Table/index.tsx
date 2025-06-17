@@ -2,24 +2,28 @@
 "use client";
 import React, { useState } from "react";
 
-interface Column {
+interface Column<T> {
   header: string;
-  accessor: string;
+  accessor: keyof T;
   className?: string;
   sortable?: boolean;
 }
 
-interface TableProps {
-  columns: Column[];
-  data: Record<string, any>[];
-  renderActions?: (row: Record<string, any>) => React.ReactNode;
+interface TableProps<T> {
+  columns: Column<T>[];
+  data: T[];
+  renderActions?: (row: T) => React.ReactNode;
 }
 
-export default function Table({ columns, data, renderActions }: TableProps) {
-  const [sortKey, setSortKey] = useState<string | null>(null);
+export default function Table<T extends Record<string, unknown>>({
+  columns,
+  data,
+  renderActions,
+}: TableProps<T>) {
+  const [sortKey, setSortKey] = useState<keyof T | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null);
 
-  const handleSort = (accessor: string) => {
+  const handleSort = (accessor: keyof T) => {
     if (sortKey === accessor) {
       if (sortOrder === "asc") setSortOrder("desc");
       else if (sortOrder === "desc") {
@@ -34,8 +38,10 @@ export default function Table({ columns, data, renderActions }: TableProps) {
 
   const sortedData = [...data].sort((a, b) => {
     if (!sortKey || !sortOrder) return 0;
+
     const aVal = a[sortKey];
     const bVal = b[sortKey];
+
     if (aVal == null || bVal == null) return 0;
 
     if (typeof aVal === "number" && typeof bVal === "number") {
@@ -47,7 +53,7 @@ export default function Table({ columns, data, renderActions }: TableProps) {
       : String(bVal).localeCompare(String(aVal));
   });
 
-  const getSortIcon = (accessor: string) => {
+  const getSortIcon = (accessor: keyof T) => {
     if (sortKey !== accessor) return "↕";
     return sortOrder === "asc" ? "↑" : sortOrder === "desc" ? "↓" : "↕";
   };
@@ -57,9 +63,9 @@ export default function Table({ columns, data, renderActions }: TableProps) {
       <table className="min-w-full bg-white shadow-md rounded-md">
         <thead>
           <tr className="bg-[#303f9f] text-left">
-            {columns?.map((col) => (
+            {columns.map((col) => (
               <th
-                key={col.accessor}
+                key={col.accessor as string}
                 className={`p-3 cursor-pointer select-none ${
                   col.className || ""
                 }`}
@@ -93,10 +99,10 @@ export default function Table({ columns, data, renderActions }: TableProps) {
               <tr key={idx} className="border-t hover:bg-gray-50">
                 {columns.map((col) => (
                   <td
-                    key={col.accessor}
+                    key={col.accessor as string}
                     className={`p-3 text-black ${col.className || ""}`}
                   >
-                    {row[col.accessor]}
+                    {String(row[col.accessor])}
                   </td>
                 ))}
                 {renderActions && <td className="p-3">{renderActions(row)}</td>}
