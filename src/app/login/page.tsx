@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function LoginPage() {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
   const router = useRouter();
   const [isChecking, setIsChecking] = useState(true);
 
@@ -32,7 +33,7 @@ export default function LoginPage() {
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const res = await fetch("http://localhost:3002/login", {
+        const res = await fetch(`${baseUrl}/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
@@ -87,7 +88,7 @@ export default function LoginPage() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              className="w-full px-4 py-2 border border-[#4f39f6] rounded-lg bg-white bg-opacity-20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-indigo-300"
+              className="w-full px-4 text-black py-2 border border-[#4f39f6] rounded-lg bg-white bg-opacity-20 placeholder-white  focus:outline-none focus:ring-2 focus:ring-indigo-300"
             />
             {formik.touched.email && formik.errors.email && (
               <p className="text-red-300 text-sm mt-1">{formik.errors.email}</p>
@@ -101,7 +102,7 @@ export default function LoginPage() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
-              className="w-full px-4 py-2 border border-[#4f39f6] rounded-lg bg-white bg-opacity-20 placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-indigo-300"
+              className="w-full px-4 py-2 border border-[#4f39f6] rounded-lg bg-white bg-opacity-20 placeholder-white text-black focus:outline-none focus:ring-2 focus:ring-indigo-300"
             />
             {formik.touched.password && formik.errors.password && (
               <p className="text-red-300 text-sm mt-1">
