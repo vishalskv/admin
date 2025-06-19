@@ -24,7 +24,7 @@ export default function Header() {
     });
 
   return (
-    <header className="bg-white shadow px-4 py-3 flex justify-between items-center">
+    <header className="bg-white shadow px-4 py-3 flex justify-between items-center ">
       <div>
         {/* <h1 className="text-xl font-semibold mb-1">Admin Dashboard</h1> */}
         <nav className="text-sm text-gray-600">
@@ -47,9 +47,9 @@ export default function Header() {
       </div>
       <button
         onClick={toggleTheme}
-        className="px-4 py-2 border rounded text-sm"
+        className="bg-black text-white dark:bg-white dark:text-black px-4 py-2 rounded"
       >
-        {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+        Switch to {theme === "dark" ? "Light" : "Dark"}
       </button>
       <button
         onClick={handleLogout}

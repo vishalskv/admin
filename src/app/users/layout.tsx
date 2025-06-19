@@ -24,7 +24,9 @@ export default function AdminLayout({
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-auto p-6 bg-gray-100">{children}</main>
+        <main className="flex-1 overflow-auto p-6 bg-[#ebe7e8]">
+          {children}
+        </main>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ export default function Sidebar() {
     { name: "Dashboard", route: "/dashboard" },
     { name: "Overview", route: "/overview" },
     { name: "Users", route: "/users" },
+    { name: "Products", route: "/products" },
     // { name: "Settings", route: "/admin/settings" },
   ];
 
