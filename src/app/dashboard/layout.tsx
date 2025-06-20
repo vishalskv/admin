@@ -20,14 +20,12 @@ export default function AdminLayout({
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
+    <div className="  text-black ">
       <div className="flex h-screen">
         <Sidebar />
         <div className="flex flex-col flex-1 overflow-hidden">
           <Header />
-          <main className="flex-1 overflow-auto p-6 bg-[#ebe7e8]">
-            {children}
-          </main>
+          <main className="flex-1 overflow-auto p-6">{children}</main>
         </div>
       </div>
     </div>
