@@ -1,11 +1,7 @@
 "use client";
 import React from "react";
-import { useTheme } from "next-themes";
 
 const page = () => {
-  const { theme, setTheme } = useTheme();
-  console.log(theme, 67688);
-
   const products = [
     {
       id: 1,
