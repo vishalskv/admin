@@ -1,7 +1,11 @@
 "use client";
 import React from "react";
+import { useTheme } from "next-themes";
 
 const page = () => {
+  const { theme, setTheme } = useTheme();
+  console.log(theme, 67688);
+
   const products = [
     {
       id: 1,
@@ -120,13 +124,15 @@ const page = () => {
   return (
     <div>
       {" "}
-      <div className="p-6 bg-gray-100 min-h-screen">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">All Products</h1>
+      <div className="p-6  min-h-screen">
+        <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">
+          All Products
+        </h1>
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-gray-800 text-black dark:text-white p-6 rounded-lg"
+              className=" rounded-lg shadow shadow-amber-100 hover:shadow-lg transition duration-300"
             >
               <div className="overflow-hidden rounded-t-lg">
                 <img
@@ -136,7 +142,7 @@ const page = () => {
                 />
               </div>
               <div className="p-4">
-                <h2 className="text-lg font-semibold text-gray-800">
+                <h2 className="text-lg font-semibold text-gray-600 dark:text-gray-300">
                   {product.name}
                 </h2>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
