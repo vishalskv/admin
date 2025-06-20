@@ -66,7 +66,7 @@ export default function Sidebar() {
             <Link
               key={route}
               href={route}
-              className={`flex items-center gap-2 p-2 rounded transition-colors`}
+              className={`flex items-center gap-2 p-2 rounded`}
               style={{
                 backgroundColor: isActive
                   ? "var(--sidebar-active-bg)"
